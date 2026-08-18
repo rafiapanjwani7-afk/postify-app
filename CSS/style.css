@@ -16,6 +16,8 @@
     --header-bg: #f8fafc;
     --text: #0f172a;
     --text-muted: #64748b;
+    --primary-teal: #10b981;
+    --primary-teal-hover: #059669;
     --primary: #14b8a6;
     --primary-hover: #0f766e;
     --border: #e2e8f0;
@@ -29,6 +31,8 @@
     --header-bg: #111827;
     --text: #f8fafc;
     --text-muted: #94a3b8;
+    --primary-teal: #10b981;
+    --primary-teal-hover: #059669;
     --primary: #14b8a6;
     --primary-hover: #0d9488;
     --border: #334155;
@@ -86,6 +90,11 @@ nav h1 {
     align-items: center;
     gap: 15px;
 }
+.custom-navbar .nav-link.active {
+    color: var(--primary-teal) !important;
+    background-color: rgba(16, 185, 129, 0.12);
+    font-weight: 600;
+}
 
 /* --- PREMIUM AVATAR PROFILE DROPDOWN --- */
 .profile-dropdown {
@@ -119,6 +128,50 @@ nav h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-family: 'Inter', sans-serif;
+}
+
+/* Theme Pill Switch */
+.theme-switch-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+}
+
+.theme-toggle-checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-switch-label {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #334155;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+}
+
+.sun-icon { color: #f59e0b; font-size: 14px; }
+.moon-icon { color: #f1f5f9; font-size: 14px; }
+
+.theme-switch-label .ball {
+    position: absolute;
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-checkbox:checked + .theme-switch-label .ball {
+    transform: translateX(26px);
 }
 
 /* Avatar Circle Base */
