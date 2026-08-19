@@ -8,7 +8,6 @@ let userid = "";
 let userName = "";
 let Email = "";
 let userRole = "";
-
 let allPartners = [];
 let editIndex = null;
 let edited = false;
