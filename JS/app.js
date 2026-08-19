@@ -71,10 +71,6 @@ async function searchPosts() {
             return;
         }
         postsContainer.innerHTML = "";
-
-        // 🎯 SweetAlert ke bajaye Empty State Card Display Hoga
-        // searchPosts function ke andar jab posts na milein:
-        // searchPosts function ke andar jab no posts milein:
         if (!data || data.length === 0) {
             postsContainer.innerHTML = `
         <div class="empty-state-card p-5 text-center my-3 shadow-sm">
