@@ -20,75 +20,89 @@
 <body>
 
     <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
-        <div class="container-fluid">
+    <div class="container-fluid">
 
-            <!-- Brand Logo -->
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <div class="logo-icon-box">
-                    <span class="logo-letter">C</span>
+        <!-- Brand Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+            <div class="logo-icon-box">
+                <span class="logo-letter">C</span>
+            </div>
+            <span class="brand-text">CampusConnect</span>
+        </a>
+
+        <!-- Mobile Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Nav Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-2">
+                <li class="nav-item">
+                    <a class="nav-link " href="dashboard.html">Create Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active " aria-current="page" href="event.html">Create Event</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="study-partners.html">Find Study Partner</a>
+                </li>
+            </ul>
+
+            <!-- Controls -->
+            <div class="d-flex align-items-center gap-3 my-2 my-lg-0 ms-auto">
+
+                <!-- Admin Panel Button -->
+                <a href="adminpanel.html" id="admin-panel-btn" class="btn btn-sm btn-info d-none me-1">
+                    <i class="bi bi-shield-lock-fill"></i> Admin Panel
+                </a>
+
+                <!-- 🔔 NOTIFICATION DROPDOWN (NEW) -->
+                <div class="dropdown">
+                    <button class="btn btn-link text-white position-relative p-0 border-0" type="button" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-bell-fill fs-5"></i>
+                        <span id="notifCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none; font-size: 0.65rem;">
+                            0
+                        </span>
+                    </button>
+
+                    <ul class="dropdown-menu dropdown-menu-end shadow mt-2" aria-labelledby="notifDropdown" id="notificationsList" style="width: 300px; max-height: 380px; overflow-y: auto;">
+                        <li class="dropdown-item text-muted text-center py-2">No new notifications</li>
+                    </ul>
                 </div>
-                <span class="brand-text">CampusConnect</span>
-            </a>
 
-            <!-- Mobile Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Nav Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html">Create Post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="event.html">Create Event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="study-partners.html">Find Study Partner</a>
-                    </li>
-                </ul>
-
-                <!-- Controls -->
-                <div class="d-flex align-items-center gap-3 my-2 my-lg-0 ms-auto">
-
-                    <!-- Admin Panel Button -->
-                    <a href="adminpanel.html" id="admin-panel-btn" class="btn btn-sm btn-info d-none me-1">
-                        <i class="bi bi-shield-lock-fill"></i> Admin Panel
-                    </a>
-
-                    <!-- Dynamic Theme Switch -->
-                    <div class="theme-switch-wrapper">
-                        <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox">
-                        <label for="theme-toggle" class="theme-switch-label">
-                            <i class="bi bi-sun-fill sun-icon"></i>
-                            <i class="bi bi-moon-stars-fill moon-icon"></i>
-                            <span class="ball"></span>
-                        </label>
-                    </div>
-
-                    <!-- Profile Dropdown -->
-                    <div class="profile-dropdown">
-                        <div class="avatar-circle" id="avatarBtn">
-                            <span id="char">U</span>
-                        </div>
-
-                        <div class="dropdown-popup" id="profilePopup">
-                            <p class="user-email-text email-text-element" id="dropdownEmail">user@mail.com</p>
-                            <hr class="dropdown-divider">
-                            <button class="dropdown-logout-btn" id="logoutBtn">
-                                <i class="bi bi-box-arrow-right me-2"></i> Logout
-                            </button>
-                        </div>
-                    </div>
-
+                <!-- Dynamic Theme Switch -->
+                <div class="theme-switch-wrapper">
+                    <input type="checkbox" id="theme-toggle" class="theme-toggle-checkbox">
+                    <label for="theme-toggle" class="theme-switch-label">
+                        <i class="bi bi-sun-fill sun-icon"></i>
+                        <i class="bi bi-moon-stars-fill moon-icon"></i>
+                        <span class="ball"></span>
+                    </label>
                 </div>
+
+                <!-- Profile Dropdown -->
+                <div class="profile-dropdown" id="logoutBtn">
+            <div class="avatar-circle" onclick="toggleProfileMenu()">
+              <span id="userInitial">U</span>
             </div>
 
+            <div class="dropdown-popup" id="profilePopup">
+              <p class="user-email-text" id="dropdownEmail">user@mail.com</p>
+              <hr class="dropdown-divider">
+              <button class="dropdown-logout-btn" onclick="logout()">
+                <i class="bi bi-box-arrow-right me-2"></i> Logout
+              </button>
+            </div>
+          </div>
+
+            </div>
         </div>
-    </nav>
+
+    </div>
+</nav>
 
     <!-- Main Content Container -->
     <div class="container my-4">

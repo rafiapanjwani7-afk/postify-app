@@ -196,6 +196,16 @@ async function loadStats() {
         const { count: likesCount, error: likeErr } = await supabase
             .from('like_table')
             .select('*', { count: 'exact', head: true });
+            const { count: eventsCount, error: eventErr } = await supabase
+            .from('events')
+            .select('*', { count: 'exact', head: true });
+
+        const { count: materialCount, error: materialErr } = await supabase
+            .from('profiles')
+            .select('*', { count: 'exact', head: true });
+
+        if (eventErr) console.error("Event stats error:", eventErr);
+        if (materialErr) console.error("Material stats error:", materialErr);
 
         if (postErr) console.error("Post stats error:", postErr);
         if (commentErr) console.error("Comment stats error:", commentErr);
@@ -204,11 +214,15 @@ async function loadStats() {
         const totalPostsEl = document.getElementById("total-posts");
         const totalCommentsEl = document.getElementById("total-comments");
         const totalLikesEl = document.getElementById("total-likes");
+        const totalEventsEl = document.getElementById("total-events");
+        const totalMaterialEl = document.getElementById("total-study") || document.getElementById("study-material");
         if (totalPostsEl) {
             totalPostsEl.innerText = postsCount || 0;
         }
         if (totalCommentsEl) totalCommentsEl.innerText = commentsCount || 0;
         if (totalLikesEl) totalLikesEl.innerText = likesCount || 0;
+        if (totalEventsEl) totalEventsEl.innerText = eventsCount ?? 0;
+if (totalMaterialEl) totalMaterialEl.innerText = materialCount ?? 0;
 
     } catch (err) {
         console.error("Error in fetchStats:", err);
@@ -266,7 +280,6 @@ async function loadAllPost() {
         console.error("Error loading posts:", err);
     }
 }
-
 // 3. Load Comments Table
 async function loadAllComments() {
     try {
@@ -428,7 +441,6 @@ async function deletePost(postId) {
         }
     }
 }
-
 // 5. Delete Comment
 async function deleteComment(commentId) {
     const result = await Swal.fire({
@@ -484,20 +496,17 @@ async function deleteComment(commentId) {
 
 // 🚀 clean and safe global tab-switching logic
 function showSection(sectionId) {
-    // Sabhi sections ko hide kar dein
     document.querySelectorAll('.admin-section').forEach(section => {
         section.classList.add('d-none');
         section.classList.remove('active-section');
     });
 
-    // Target section ko show karein
     const targetSection = document.getElementById(`section-${sectionId}`);
     if (targetSection) {
         targetSection.classList.remove('d-none');
         targetSection.classList.add('active-section');
     }
 
-    // Nav links par active class toggle karein
     document.querySelectorAll('.sidebar .nav-link').forEach(link => {
         link.classList.remove('active');
     });
@@ -505,6 +514,17 @@ function showSection(sectionId) {
     const activeLink = document.getElementById(`tab-${sectionId}`);
     if (activeLink) {
         activeLink.classList.add('active');
+    }
+
+    // Is conditional routing mein sectionId check hoga
+    if (sectionId === 'events') {
+        loadAllEvents();
+    } else if (sectionId === 'users') {
+        loadAllUsers();
+    } else if (sectionId === 'posts') {
+        loadAllPost();
+    } else if (sectionId === 'comments') {
+        loadAllComments();
     }
 }
 // Security Check (Role-based instead of Email-based)
@@ -586,9 +606,155 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-window.logoutAdmin = logoutAdmin;
+/// ==========================================
+// LOAD ALL EVENTS (BUG FIXED)
+// ==========================================
+async function loadAllEvents() {
+    const tableBody = document.getElementById("events-table-body");
+    if (!tableBody) return;
 
-// Globals set karein taaki HTML inline onclick seamlessly kaam karein
+    // Local Helper Function to prevent ReferenceError
+    const sanitize = (str) => {
+        if (!str) return "";
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    };
+
+    try {
+        console.log("Fetching events from Supabase...");
+
+        const { data: events, error } = await supabase
+            .from("events")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+        if (error) throw error;
+
+        console.log("Retrieved events successfully:", events);
+
+        if (!events || events.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center text-muted py-4">
+                        <i class="bi bi-calendar-x fs-3 d-block mb-2"></i>
+                        No events registered yet.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        tableBody.innerHTML = "";
+
+        events.forEach((event, index) => {
+            const title = sanitize(event.title || "Untitled Event");
+            const date = sanitize(event.event_date || event.date || "N/A");
+            const time = sanitize(event.event_time || event.time || "N/A");
+            const location = sanitize(event.location || "N/A");
+
+            tableBody.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td><strong>${title}</strong></td>
+                    <td><i class="bi bi-calendar3 me-1"></i>${date}</td>
+                    <td><i class="bi bi-clock me-1"></i>${time}</td>
+                    <td><i class="bi bi-geo-alt me-1"></i>${location}</td>
+                    <td>
+                        <button 
+                            class="btn btn-sm btn-outline-danger px-3"
+                            onclick="deleteEvent('${event.id}')"
+                        >
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+    } catch (err) {
+        console.error("Error loading events:", err);
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="text-center text-danger py-4">
+                    <i class="bi bi-exclamation-triangle fs-3 d-block mb-2"></i>
+                    Failed to load events. (${err.message || 'Error'})
+                </td>
+            </tr>
+        `;
+    }
+}
+async function deleteEvent(eventId) {
+    const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This event will be permanently deleted!",
+        icon: "warning",
+        iconColor: "#f59e0b",
+        showCancelButton: true,
+        confirmButtonColor: "#0d9488",
+        cancelButtonColor: "#e11d48",
+        confirmButtonText: '<i class="bi bi-trash"></i> Yes, delete it!',
+        cancelButtonText: "Cancel",
+        background: "#15222e",
+        color: "#f3f4f6"
+    });
+
+    if (!result.isConfirmed) return;
+
+    try {
+        // Delete related participants first (Optional safety catch)
+        const { error: participantError } = await supabase
+            .from("event_participants")
+            .delete()
+            .eq("event_id", eventId);
+
+        if (participantError && participantError.code !== 'PGRST116') {
+            console.warn("Participant deletion warning:", participantError.message);
+        }
+
+        // Delete Main Event
+        const { error } = await supabase
+            .from("events")
+            .delete()
+            .eq("id", eventId);
+
+        if (error) throw error;
+
+        await Swal.fire({
+            title: "Deleted!",
+            text: "Event has been removed.",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+            background: "#15222e",
+            color: "#f3f4f6"
+        });
+
+        await loadAllEvents();
+
+        if (typeof loadStats === "function") {
+            await loadStats();
+        }
+
+    } catch (err) {
+        console.error("Delete event error:", err);
+        Swal.fire({
+            title: "Error!",
+            text: err.message || "Unable to delete event.",
+            icon: "error",
+            background: "#15222e",
+            color: "#f3f4f6"
+        });
+    }
+}
+
+// 3. Global Exports
+window.loadAllEvents = loadAllEvents;
+window.deleteEvent = deleteEvent;
+window.logoutAdmin = logoutAdmin;
 window.showSection = showSection;
 window.deletePost = deletePost;
 window.deleteComment = deleteComment;
@@ -597,6 +763,7 @@ window.loadAllPost = loadAllPost;
 window.loadAllComments = loadAllComments;
 window.updatePostData = updatePostData
 window.openEditMode = openEditMode
+window.loadAllEvents =loadAllEvents
 document.addEventListener("DOMContentLoaded", () => {
     // 1. FOOLPROOF POINTER MOVEMENT
     let pointer = document.getElementById("pointer");
