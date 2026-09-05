@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postify - Authentication</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+        <!-- Bootstrap Icons CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="CSS/auth.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <div class="auth-container" id="authContainer">
+
+        <!-- Left Side: Interactive Branding Overlay Panel -->
+        <div class="overlay-panel">
+            <div class="brand-header brand-logo-wrapper">
+                <div class="logo-box">
+                    <span>P</span>
+                </div>
+                <span class="brand-title">Postify</span>
+            </div>
+
+            <div class="hero-content">
+                <div class="user-badge">
+                    <i class="fa-solid fa-users"></i>
+                    <span>10K+ Users are already posting!</span>
+                </div>
+
+                <h1 class="hero-title">Welcome to <br><span class="gradient-text">Postify</span></h1>
+                <p class="hero-subtitle">
+                    Connect, share and grow with people around the world. Post your thoughts, share your stories and
+                    build your community.
+                </p>
+
+                <!-- Features List -->
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <div>
+                            <h4>Fast & Real-time</h4>
+                            <p>Experience real-time updates and instant interactions.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-user-group"></i></div>
+                        <div>
+                            <h4>Connect & Engage</h4>
+                            <p>Connect with amazing people and build relationships.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <h4>Secure & Private</h4>
+                            <p>Your data is safe with us. We value your privacy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Footer -->
+                <div class="social-proof">
+                    <div class="social-links-wrapper">
+                        <a href="#" class="social-icon-btn" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icon-btn" aria-label="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" class="social-icon-btn" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon-btn" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Forms Container -->
+        <div class="forms-wrapper">
+
+            <!-- Sign Up Form Panel -->
+            <div class="form-panel signup-panel">
+                <div class="form-header">
+                    <h2>Create your account</h2>
+                    <p>Already have an account? <a href="#" id="toLoginLink">Login</a></p>
+                </div>
+
+                <form id="signupForm">
+                    <div class="row-2-col">
+                        <div class="input-group">
+                            <label>First Name</label>
+                            <div class="input-wrapper">
+                                <i class="fa-regular fa-user"></i>
+                                <input type="text" id="firstName" placeholder="John" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Last Name</label>
+                            <div class="input-wrapper">
+                                <i class="fa-regular fa-user"></i>
+                                <input type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="signEmail" placeholder="youremail@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="signNumber" placeholder="0300 1234567" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="signPassword" placeholder="••••••••" required>
+                            <i class="fa-regular fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+
+                    <div class="terms-check">
+                        <input type="checkbox" id="terms" required checked>
+                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy
+                                Policy</a></label>
+                    </div>
+
+                    <button type="submit" class="submit-btn glow-btn">
+                        <span>Create Account</span>
+                        <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                </form>
+
+                <div class="divider"><span>OR</span></div>
+
+                <button type="button" onclick="loginWithGoogle()" class="google-btn">
+                    <img src="images/google.png" alt="Google">
+                    <span>Continue with Google</span>
+                </button>
+            </div>
+
+            <!-- Login Form Panel -->
+            <div class="form-panel login-panel">
+                <div class="form-header">
+                    <h2>Welcome back</h2>
+                    <p>Don't have an account? <a href="#" id="toSignupLink">Sign up</a></p>
+                </div>
+
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="email" placeholder="youremail@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                            <i class="fa-regular fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn glow-btn">
+                        <span>Login to Account</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="divider"><span>OR</span></div>
+
+                <button type="button" onclick="loginWithGoogle()" class="google-btn">
+                    <img src="images/google.png" alt="Google">
+                    <span>Continue with Google</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Center Toggle Slider Button -->
+        <div class="split-slider-btn" id="sliderToggleBtn">
+            <i class="fa-solid fa-code-compare"></i>
+        </div>
+
+    </div>
+
+    <script type="module" src="JS/auth.js"></script>
+</body>
+
+</html>

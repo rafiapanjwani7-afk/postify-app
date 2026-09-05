@@ -1,0 +1,1408 @@
+:root {
+    --bg-dark: #070913;
+    --panel-dark: #0D0F1D;
+    --card-bg: rgba(22, 25, 45, 0.7);
+    --purple-primary: #7C3AED;
+    --purple-glow: #A855F7;
+    --emerald-accent: #00DFA2;
+    --input-bg: rgba(255, 255, 255, 0.04);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-muted: #94A3B8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    padding: 20px;
+}
+
+/* Main Split Container */
+.auth-container {
+    width: 100%;
+    max-width: 1150px;
+    height: 700px;
+    background: var(--panel-dark);
+    border-radius: 28px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Left Overlay Branding Panel */
+.overlay-panel {
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(circle at top left, #2E1065, #0D0F1D 70%);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--purple-glow), var(--purple-primary));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.brand-name {
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.user-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--purple-glow);
+    margin-bottom: 16px;
+}
+
+.hero-title {
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #C084FC, #7C3AED);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* Features List */
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.feature-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(124, 58, 237, 0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple-glow);
+    font-size: 14px;
+}
+
+.feature-item h4 {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.feature-item p {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* Social Proof */
+.social-proof {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.avatar-group {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-group img, .avatar-count {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--panel-dark);
+    margin-left: -8px;
+}
+
+.avatar-group img:first-child { margin-left: 0; }
+
+.avatar-count {
+    background: var(--purple-primary);
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rating-info {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.stars {
+    color: #F59E0B;
+    letter-spacing: 1px;
+}
+
+/* Right Forms Wrapper */
+.forms-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+.form-panel {
+    width: 50%;
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.4s ease;
+}
+
+.signup-panel { right: 0; }
+.login-panel { left: 0; opacity: 0; pointer-events: none; }
+
+.form-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.form-header p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.form-header a {
+    color: var(--purple-glow);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.row-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.input-group {
+    margin-bottom: 12px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #D1D5DB;
+    margin-bottom: 5px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 12px;
+    color: #6B7280;
+    font-size: 13px;
+}
+
+.input-wrapper .toggle-password {
+    left: auto;
+    right: 12px;
+    cursor: pointer;
+}
+
+.input-wrapper input {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 9px 12px 9px 34px;
+    color: #FFFFFF;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input-wrapper input:focus {
+    border-color: var(--purple-glow);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+}
+
+.terms-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.terms-check a {
+    color: var(--purple-glow);
+    text-decoration: none;
+}
+
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--purple-glow), var(--purple-primary));
+    color: #FFF;
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+}
+
+.divider {
+    text-align: center;
+    margin: 14px 0;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.divider span {
+    position: relative;
+    background: var(--panel-dark);
+    padding: 0 10px;
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+.google-btn {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: #FFF;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Center Sliding Divider Button */
+.split-slider-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: var(--panel-dark);
+    border: 2px solid var(--purple-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple-glow);
+    z-index: 20;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Sliding Animation States */
+.auth-container.login-active .overlay-panel {
+    transform: translateX(100%);
+}
+
+.auth-container.login-active .split-slider-btn {
+    transform: translate(-50%, -50%) rotate(180deg);
+}
+
+.auth-container.login-active .signup-panel {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.auth-container.login-active .login-panel {
+    opacity: 1;
+    pointer-events: all;
+}
+/* Google Button Sizing Fix */
+.google-btn {
+    width: 100%;
+    height: 44px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: #FFF;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Image Restriction Fix */
+.google-btn img {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+    max-width: 20px !important;
+    max-height: 20px !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin: 0 !important;
+}
+
+.google-btn span {
+    white-space: nowrap;
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+.google-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Input Autofill & White Background Removal Fix */
+.input-wrapper input {
+    width: 100%;
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 9px 12px 9px 34px;
+    color: #FFFFFF !important;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+/* Browser Autofill Fix (Yellow/White box removal) */
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover, 
+.input-wrapper input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #0F1222 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Scrollbar Hide for Overflow Containers */
+.form-panel {
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+}
+
+.form-panel::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+/* Google Icon & Button Sizing Fix */
+.google-btn {
+    width: 100%;
+    height: 44px;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Image Restriction */
+.google-btn img {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin: 0 !important;
+}
+
+/* Browser Autofill Background Fix (White background removal) */
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover, 
+.input-wrapper input:-webkit-autofill:focus,
+.input-wrapper input:-webkit-autofill:active {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px #0D0F1D inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Input Styles */
+.input-wrapper input {
+    width: 100%;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 9px 12px 9px 34px;
+    color: #FFFFFF !important;
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Form Container Overflow Fix */
+.form-panel {
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+}
+
+.form-panel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+}
+/* Container height thodi kam aur dynamic karein */
+.auth-container {
+    width: 100%;
+    max-width: 1050px;
+    min-height: 620px; /* 700px ki jagah 620px karein */
+    height: auto;
+    background: var(--panel-dark);
+    border-radius: 28px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Left Panel Content Gap Fix */
+.overlay-panel {
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(circle at top left, #2E1065, #0D0F1D 70%);
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 'space-between' ko badal kar 'flex-start' karein */
+    gap: 20px; /* Sub elements ke darmayan fixed 20px space */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Hero Content Gap Adjustment */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hero-title {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+.hero-subtitle {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+/* Container sizing fix */
+.auth-container {
+    width: 100%;
+    max-width: 1050px;
+    height: 650px; /* Fixed height critical hai overlay overlay ke liye */
+    background: var(--panel-dark);
+    border-radius: 28px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Left Panel Sizing & Layering Fix */
+.overlay-panel {
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(circle at top left, #2E1065, #0D0F1D 70%);
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    box-sizing: border-box;
+}
+
+/* Forms Container Alignment Fix */
+.forms-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: relative;
+}
+
+.form-panel {
+    width: 50%;
+    height: 100%;
+    padding: 30px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    box-sizing: border-box;
+    overflow-y: auto;
+    transition: opacity 0.4s ease;
+}
+
+/* Right Side Panel Placement */
+.signup-panel {
+    right: 0;
+    left: auto;
+}
+
+/* Left Side Panel Placement for Login */
+.login-panel {
+    left: 0;
+    right: auto;
+    opacity: 0;
+    pointer-events: none;
+}
+/* Left Overlay Panel Flex Fix */
+.overlay-panel {
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(circle at top left, #2E1065, #0D0F1D 70%);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important; /* Extra vertical space khatam karne ke liye */
+    gap: 16px; /* Postify header aur baqi content ke darmayan fixed chota gap */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    box-sizing: border-box;
+    overflow-y: auto;
+    scrollbar-width: none; /* Hide scrollbar for clean UI */
+}
+
+.overlay-panel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Brand Header Margin Reset */
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0 !important;
+}
+
+/* Hero Content Stack */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-badge {
+    align-self: flex-start;
+    margin-bottom: 0 !important;
+}
+
+.hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0 !important;
+}
+
+.hero-subtitle {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 0 !important;
+}
+
+/* Features List Tight Spacing */
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 0 !important;
+}
+
+/* Social Proof Footer Alignment */
+.social-proof {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 4px;
+}
+/* Left Panel Vertical Centering Fix */
+.overlay-panel {
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(circle at top left, #2E1065, #0D0F1D 70%);
+    padding: 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important; /* Panel content ko vertical middle mein center karne ke liye */
+    gap: 18px; /* Sab sections ke darmayan balance vertical space */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    box-sizing: border-box;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.overlay-panel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Internal Layout Spacing Adjustments */
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-badge {
+    align-self: flex-start;
+    margin-bottom: 2px;
+}
+
+.hero-title {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0;
+}
+
+.hero-subtitle {
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.social-proof {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+}
+/* Scroll Disabled & Container Fix */
+.auth-container {
+    width: 100%;
+    max-width: 1050px;
+    height: 620px;
+    background: var(--panel-dark);
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+    display: flex;
+    position: relative;
+    overflow: hidden !important; /* Forces no scrollbar anywhere */
+}
+
+/* Left Overlay Panel No Scroll Fix */
+.overlay-panel {
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(circle at top left, #2E1065, #0D0F1D 70%);
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    box-sizing: border-box;
+    overflow: hidden !important; /* Scroll strictly disabled */
+}
+
+/* Compact Inner Elements Spacing */
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+}
+
+.brand-name {
+    font-size: 20px;
+}
+
+.user-badge {
+    padding: 4px 10px;
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.hero-title {
+    font-size: 25px;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 11.5px;
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+/* Compact Feature Cards */
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.feature-item {
+    gap: 10px;
+}
+
+.feature-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+}
+
+.feature-item h4 {
+    font-size: 12px;
+}
+
+.feature-item p {
+    font-size: 10px;
+}
+
+/* Footer Proof */
+.social-proof {
+    gap: 10px;
+}
+
+.avatar-group img, .avatar-count {
+    width: 26px;
+    height: 26px;
+}
+
+.rating-info {
+    font-size: 10px;
+}
+
+/* Right Side Form Panel No Scroll Fix */
+.form-panel {
+    width: 50%;
+    height: 100%;
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    box-sizing: border-box;
+    overflow: hidden !important; /* Scroll strictly disabled */
+    transition: opacity 0.4s ease;
+}
+
+/* Compact Inputs & Form Elements */
+.input-group {
+    margin-bottom: 8px;
+}
+
+.input-group label {
+    font-size: 10.5px;
+    margin-bottom: 3px;
+}
+
+.input-wrapper input {
+    padding: 7px 10px 7px 32px;
+    font-size: 12px;
+}
+
+.terms-check {
+    margin-bottom: 10px;
+    font-size: 10.5px;
+}
+
+.submit-btn {
+    padding: 9px;
+    font-size: 12px;
+}
+
+.divider {
+    margin: 8px 0;
+}
+
+.google-btn {
+    height: 38px;
+    font-size: 12px;
+}
+/* SweetAlert2 Dark Custom Theme Overlay */
+div.swal2-container.swal2-backdrop-show {
+    background: rgba(7, 9, 19, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+.swal2-popup.postify-swal-popup {
+    background: #0D0F1D !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px !important;
+    padding: 24px !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(124, 58, 237, 0.2) !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    color: #FFFFFF !important;
+}
+
+/* Title & Content Text */
+.swal2-popup.postify-swal-popup .swal2-title {
+    color: #FFFFFF !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+}
+
+.swal2-popup.postify-swal-popup .swal2-html-container {
+    color: #94A3B8 !important;
+    font-size: 13px !important;
+}
+
+/* Custom Buttons Styling */
+.swal2-popup.postify-swal-popup .postify-swal-confirm {
+    background: linear-gradient(135deg, #A855F7, #7C3AED) !important;
+    color: #FFFFFF !important;
+    border-radius: 10px !important;
+    padding: 10px 24px !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4) !important;
+}
+
+.swal2-popup.postify-swal-popup .postify-swal-cancel {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #D1D5DB !important;
+    border-radius: 10px !important;
+    padding: 10px 24px !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Toast Notification Styling */
+.swal2-toast.postify-swal-toast {
+    background: #0D0F1D !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+    color: #FFFFFF !important;
+}
+
+.swal2-toast.postify-swal-toast .swal2-title {
+    color: #FFFFFF !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+/* ===================================================
+   1. BUTTONS & INTERACTIVE ELEMENTS (UI SYNCHRONIZED)
+   =================================================== */
+
+/* Primary Emerald Gradient Buttons (Post, Submit, Primary Actions) */
+.btn-primary,
+.btn-success,
+.btn-emerald,
+.postBtn,
+#postBtn,
+button[type="submit"] {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25) !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-emerald:hover,
+.postBtn:hover,
+#postBtn:hover,
+button[type="submit"]:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Secondary / Outline Buttons (Action Icons, Like, Comment, Cancel) */
+.btn-secondary,
+.btn-outline-secondary,
+.action-btn,
+.btn-icon-action {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-muted) !important;
+    border-radius: 12px !important;
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-secondary:hover,
+.btn-outline-secondary:hover,
+.action-btn:hover,
+.btn-icon-action:hover {
+    background: rgba(16, 185, 129, 0.15) !important;
+    color: #10b981 !important;
+    border-color: rgba(16, 185, 129, 0.4) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Danger / Logout Buttons */
+.btn-danger,
+.dropdown-logout-btn,
+button[onclick="logout()"] {
+    background: linear-gradient(135deg, #e11d48 0%, #be123c 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25) !important;
+    transition: all 0.2s ease !important;
+}
+
+.btn-danger:hover,
+.dropdown-logout-btn:hover,
+button[onclick="logout()"]:hover {
+    background: linear-gradient(135deg, #be123c 0%, #9f1239 100%) !important;
+    box-shadow: 0 6px 16px rgba(225, 29, 72, 0.35) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Active Color & Background Swatches */
+.colorbox.selected,
+.bg-preset.active,
+.color-preset.active,
+.bgImg.addImg {
+    border: 2px solid #10b981 !important;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.5) !important;
+    transform: scale(1.08) !important;
+}
+
+/* Theme Switch Knob */
+.slider::before {
+    background-color: #10b981 !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.6) !important;
+}
+/* ===================================================
+   BUTTONS & INTERACTIVE ELEMENTS
+   POSTIFY DARK PURPLE UI
+   =================================================== */
+
+/* ---------- PRIMARY BUTTONS ---------- */
+
+.btn-primary,
+.btn-success,
+.btn-emerald,
+.postBtn,
+#postBtn,
+button[type="submit"] {
+    background: linear-gradient(
+        135deg,
+        #9333ea 0%,
+        #7c3aed 50%,
+        #6d28d9 100%
+    ) !important;
+
+    color: #ffffff !important;
+    border: 1px solid rgba(168, 85, 247, 0.35) !important;
+    border-radius: 10px !important;
+
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.2px;
+
+    box-shadow:
+        0 4px 16px rgba(124, 58, 237, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+
+    transition:
+        background 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-emerald:hover,
+.postBtn:hover,
+#postBtn:hover,
+button[type="submit"]:hover {
+    background: linear-gradient(
+        135deg,
+        #a855f7 0%,
+        #9333ea 50%,
+        #7c3aed 100%
+    ) !important;
+
+    box-shadow:
+        0 6px 22px rgba(147, 51, 234, 0.42),
+        0 0 12px rgba(168, 85, 247, 0.18) !important;
+
+    transform: translateY(-1px) !important;
+}
+
+.btn-primary:active,
+.btn-success:active,
+.btn-emerald:active,
+.postBtn:active,
+#postBtn:active,
+button[type="submit"]:active {
+    transform: translateY(0) !important;
+
+    box-shadow:
+        0 3px 10px rgba(124, 58, 237, 0.25) !important;
+}
+
+
+/* ---------- SECONDARY / OUTLINE BUTTONS ---------- */
+
+.btn-secondary,
+.btn-outline-secondary,
+.action-btn,
+.btn-icon-action {
+    background: rgba(255, 255, 255, 0.035) !important;
+
+    border: 1px solid rgba(139, 92, 246, 0.22) !important;
+
+    color: #a9a3bd !important;
+    border-radius: 10px !important;
+
+    padding: 8px 16px !important;
+    font-weight: 500 !important;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease !important;
+}
+
+.btn-secondary:hover,
+.btn-outline-secondary:hover,
+.action-btn:hover,
+.btn-icon-action:hover {
+    background: rgba(124, 58, 237, 0.12) !important;
+
+    color: #c084fc !important;
+
+    border-color: rgba(168, 85, 247, 0.45) !important;
+
+    transform: translateY(-1px) !important;
+}
+
+
+/* ---------- DANGER / LOGOUT ---------- */
+
+.btn-danger,
+.dropdown-logout-btn,
+button[onclick="logout()"] {
+    background: linear-gradient(
+        135deg,
+        #e11d48 0%,
+        #be123c 100%
+    ) !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+    border-radius: 10px !important;
+
+    font-weight: 600 !important;
+
+    box-shadow:
+        0 4px 14px rgba(225, 29, 72, 0.22) !important;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease !important;
+}
+
+.btn-danger:hover,
+.dropdown-logout-btn:hover,
+button[onclick="logout()"]:hover {
+    background: linear-gradient(
+        135deg,
+        #f43f5e 0%,
+        #e11d48 100%
+    ) !important;
+
+    box-shadow:
+        0 6px 18px rgba(225, 29, 72, 0.32) !important;
+
+    transform: translateY(-1px) !important;
+}
+
+
+/* ---------- ACTIVE / SELECTED STATES ---------- */
+
+.colorbox.selected,
+.bg-preset.active,
+.color-preset.active,
+.bgImg.addImg {
+    border: 2px solid #a855f7 !important;
+
+    box-shadow:
+        0 0 12px rgba(168, 85, 247, 0.45) !important;
+
+    transform: scale(1.06) !important;
+}
+
+
+/* ---------- THEME SWITCH ---------- */
+
+.slider::before {
+    background: linear-gradient(
+        135deg,
+        #a855f7,
+        #7c3aed
+    ) !important;
+
+    box-shadow:
+        0 0 10px rgba(168, 85, 247, 0.55) !important;
+}
+/* Center Toggle Badge styling */
+.center-toggle-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #1e1e2d;
+    border: 2px solid #a855f7;
+    color: #a855f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+/* Input fields inside signup form */
+.form-control, .input-group-text {
+    display: flex;
+    align-items: center;
+    height: 45px;
+    font-size: 14px;
+}
+
+.input-group-text {
+    background: transparent;
+    border-right: none;
+    color: #94a3b8;
+}
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-left: none;
+    color: #ffffff !important;
+}
+
+.form-control::placeholder {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Checkbox and Text align */
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-check-input {
+    margin-top: 0 !important;
+}
+/* Container Alignment */
+.brand-logo-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Rounded Icon Box with Gradient & Glow */
+.logo-box {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 18px;
+    box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+}
+
+/* Gradient Text for Postify */
+.brand-title {
+    font-size: 22px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 50%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+/* Container Spacing */
+.social-links-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* Individual Icon Circle Button */
+.social-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.25);
+    color: #c084fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Hover & Glow Effect */
+.social-icon-btn:hover {
+    background: #a855f7;
+    color: #ffffff;
+    border-color: #a855f7;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+}

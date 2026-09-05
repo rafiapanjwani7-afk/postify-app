@@ -1,0 +1,1805 @@
+/* ===================================================
+   1. GLOBAL & CSS VARIABLES
+   =================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+:root,
+[data-theme="light"] {
+    --body-bg: #f5f3ff;
+    --navbar-bg: #ffffff;
+    --card-bg: #ffffff;
+    --header-bg: #faf9ff;
+
+    --text: #171327;
+    --text-muted: #6b6580;
+
+    --primary: #8b5cf6;
+    --primary-hover: #7c3aed;
+    --primary-dark: #6d28d9;
+    --primary-light: #c084fc;
+
+    --primary-soft: rgba(139, 92, 246, 0.12);
+    --primary-soft-hover: rgba(139, 92, 246, 0.22);
+
+    --border: #e9e4f5;
+    --border-hover: rgba(139, 92, 246, 0.35);
+
+    --danger: #e11d48;
+    --danger-hover: #be123c;
+
+    --warning: #f59e0b;
+
+    --shadow-sm: 0 4px 12px rgba(31, 20, 64, 0.06);
+    --shadow-md: 0 10px 30px rgba(31, 20, 64, 0.08);
+    --shadow-lg: 0 18px 45px rgba(31, 20, 64, 0.12);
+
+    --active-gradient: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+}
+
+[data-theme="dark"],
+body.dark-mode,
+body.dark {
+    --body-bg: #0b0913;
+    --navbar-bg: #11101a;
+    --card-bg: #15131f;
+    --header-bg: #1b1827;
+
+    --text: #f8f7ff;
+    --text-muted: #aaa4bb;
+
+    --primary: #a855f7;
+    --primary-hover: #9333ea;
+    --primary-dark: #7e22ce;
+    --primary-light: #f0abfc;
+
+    --primary-soft: rgba(168, 85, 247, 0.16);
+    --primary-soft-hover: rgba(168, 85, 247, 0.26);
+
+    --border: rgba(255, 255, 255, 0.09);
+    --border-hover: rgba(168, 85, 247, 0.45);
+
+    --danger: #fb7185;
+    --danger-hover: #e11d48;
+
+    --warning: #fbbf24;
+
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.20);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.28);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.40);
+
+    --active-gradient: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    background: var(--body-bg) !important;
+    color: var(--text) !important;
+    cursor: default;
+}
+
+
+/* ===================================================
+   2. SCROLLBAR & CUSTOM CURSOR
+   =================================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--body-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        180deg,
+        #d946ef,
+        var(--primary)
+    );
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #d946ef;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+}
+
+.cursor-outline {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99998;
+    transition:
+        background-color 0.2s,
+        border-color 0.2s;
+}
+
+#pointer {
+    width: 18px;
+    height: 18px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    filter: blur(4px);
+    box-shadow:
+        0 0 12px rgba(139, 92, 246, 0.8),
+        0 0 25px rgba(217, 70, 239, 0.4);
+}
+
+
+/* ===================================================
+   3. NAVBAR
+   =================================================== */
+
+nav,
+.navbar,
+.custom-navbar,
+.bg-dark.navbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 30px !important;
+    background-color: var(--navbar-bg) !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.navbar-brand,
+.navbar-brand span,
+.logo-text,
+nav h1 {
+    color: var(--text) !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.5px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    text-decoration: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+.nav-link {
+    color: var(--text) !important;
+}
+
+.nav-link:hover {
+    color: var(--primary) !important;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* ===================================================
+   4. LOGO & BRANDING
+   =================================================== */
+
+.logo-icon-box {
+    width: 38px;
+    height: 38px;
+    background: var(--active-gradient);
+    color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:
+        0 5px 15px rgba(139, 92, 246, 0.35);
+}
+
+.logo-letter {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+}
+
+.brand-text {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(
+        to right,
+        #c084fc,
+        #d946ef
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Inter", sans-serif;
+}
+
+
+/* ===================================================
+   5. NAVBAR TOGGLER
+   =================================================== */
+
+.navbar-toggler {
+    border-color: var(--border) !important;
+}
+
+.navbar-toggler:focus {
+    box-shadow:
+        0 0 0 3px var(--primary-soft) !important;
+}
+
+.navbar-toggler-icon {
+    filter: invert(var(--toggler-invert, 0));
+}
+
+[data-theme="dark"] .navbar-toggler-icon,
+body.dark-mode .navbar-toggler-icon,
+body.dark .navbar-toggler-icon {
+    --toggler-invert: 1;
+}
+
+
+/* ===================================================
+   6. PROFILE DROPDOWN
+   =================================================== */
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    background: var(--active-gradient) !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow:
+        0 5px 15px rgba(139, 92, 246, 0.35);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.avatar-circle:hover {
+    transform: scale(1.06);
+    box-shadow:
+        0 8px 22px rgba(217, 70, 239, 0.45);
+}
+
+.avatar-circle span {
+    color: #ffffff !important;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.dropdown-popup {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    min-width: 210px;
+    border-radius: 14px;
+    padding: 12px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1100;
+    animation: fadeInDropdown 0.2s ease;
+}
+
+.dropdown-popup.show {
+    display: block;
+}
+
+.user-email-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    padding: 0 4px;
+    word-break: break-all;
+}
+
+.dropdown-divider {
+    border-color: var(--border);
+    margin: 8px 0;
+}
+
+.dropdown-logout-btn {
+    width: 100%;
+    background-color: var(--danger);
+    color: #ffffff;
+    border: none;
+    padding: 9px 12px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.dropdown-logout-btn:hover {
+    background-color: var(--danger-hover);
+    transform: translateY(-1px);
+}
+
+@keyframes fadeInDropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ===================================================
+   7. THEME TOGGLE
+   =================================================== */
+
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+    margin: 0 !important;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ede9fe;
+    border: 1px solid #ddd6fe;
+    border-radius: 30px;
+    transition: 0.4s;
+    display: flex;
+    align-items: center;
+}
+
+.slider::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 2px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow:
+        0 3px 8px rgba(139, 92, 246, 0.35);
+    transition: 0.4s;
+    z-index: 2;
+}
+
+.theme-switch .sun-icon,
+.theme-switch .moon-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px !important;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+}
+
+.theme-switch .sun-icon {
+    left: 7px;
+    color: #ffffff !important;
+    opacity: 1;
+}
+
+.theme-switch .moon-icon {
+    right: 7px;
+    color: #ffffff !important;
+    opacity: 0;
+}
+
+.theme-switch input:checked + .slider {
+    background-color: #211b35;
+    border-color: #3b3156;
+}
+
+.theme-switch input:checked + .slider::before {
+    transform: translateX(25px);
+    background-color: #a855f7;
+}
+
+.theme-switch input:checked + .slider .sun-icon {
+    opacity: 0;
+}
+
+.theme-switch input:checked + .slider .moon-icon {
+    opacity: 1;
+}
+
+
+/* ===================================================
+   8. POST CONTAINER / SIDEBAR
+   =================================================== */
+
+.postcont {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 35px;
+}
+
+.postcont:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-lg);
+}
+
+.create-post-card {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 20px !important;
+    box-shadow: var(--shadow-md);
+}
+
+
+/* ===================================================
+   9. FORM LABELS & INPUTS
+   =================================================== */
+
+.form-label {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.form-control,
+.custom-input {
+    border-radius: 12px !important;
+    border: 1px solid var(--border) !important;
+    background: var(--card-bg) !important;
+    color: var(--text) !important;
+    padding: 10px 14px !important;
+    font-size: 0.9rem !important;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.form-control:hover,
+.custom-input:hover {
+    border-color: var(--border-hover) !important;
+}
+
+.form-control:focus,
+.custom-input:focus {
+    border-color: var(--primary) !important;
+    box-shadow:
+        0 0 0 3px var(--primary-soft) !important;
+    background: var(--card-bg) !important;
+    outline: none !important;
+}
+
+.form-control::placeholder,
+.custom-input::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.8 !important;
+}
+
+textarea.form-control {
+    resize: vertical;
+}
+
+
+/* ===================================================
+   10. IMAGE PREVIEW
+   =================================================== */
+
+#previewImg {
+    display: block;
+    margin: auto;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+#previewImg.d-none {
+    display: none !important;
+}
+
+
+/* ===================================================
+   11. IMAGES & COLOR SWATCHES
+   =================================================== */
+
+.images img {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.images img:hover {
+    transform: scale(1.08);
+}
+
+.userimg {
+    width: 50px;
+    height: 50px;
+    background: var(--active-gradient);
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 3px solid var(--primary) !important;
+    box-shadow:
+        0 0 15px rgba(139, 92, 246, 0.35);
+}
+
+.userimg:hover {
+    transform: scale(1.08);
+    box-shadow:
+        0 0 22px rgba(217, 70, 239, 0.50);
+}
+
+.bgImg.addImg {
+    border: 2px solid var(--primary) !important;
+    transform: scale(1.08);
+    box-shadow:
+        0 0 12px rgba(139, 92, 246, 0.45);
+    transition: all 0.2s ease;
+}
+
+.colorbox,
+.bg-preset,
+.color-preset {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.colorbox:hover,
+.bg-preset:hover,
+.color-preset:hover {
+    transform: scale(1.1);
+}
+
+.colorbox.selected,
+.bg-preset.active,
+.color-preset.active {
+    border-color: var(--primary) !important;
+    transform: scale(1.08);
+    box-shadow:
+        0 0 0 3px var(--primary-soft),
+        0 0 12px rgba(139, 92, 246, 0.35);
+}
+
+
+/* ===================================================
+   12. PRIMARY BUTTONS
+   =================================================== */
+
+.btn-primary,
+.btn-success,
+.postBtn,
+#postBtn,
+button#postBtn,
+button[type="submit"] {
+    width: 100%;
+    border: none !important;
+    padding: 12px 20px !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    background: var(--active-gradient) !important;
+    font-size: 16px;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+    box-shadow:
+        0 5px 16px rgba(139, 92, 246, 0.35) !important;
+    transition:
+        all 0.3s ease !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.postBtn:hover,
+#postBtn:hover,
+button#postBtn:hover,
+button[type="submit"]:hover {
+    background: linear-gradient(
+        135deg,
+        #7c3aed 0%,
+        #c026d3 100%
+    ) !important;
+    box-shadow:
+        0 8px 25px rgba(217, 70, 239, 0.45) !important;
+    transform: translateY(-2px) !important;
+}
+
+.btn-primary:active,
+.btn-success:active,
+.postBtn:active,
+#postBtn:active {
+    transform: translateY(0) !important;
+}
+
+
+/* ===================================================
+   13. CUSTOM EMERALD / COMMENT SEND OVERRIDE
+   =================================================== */
+
+.btn-emerald,
+#sendCommentBtn,
+.send-btn,
+button.btn-emerald,
+.comment-input-group button,
+.btn-success.send-btn,
+button.btn-success {
+    background: var(--active-gradient) !important;
+    background-color: var(--primary) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 0.95rem;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35) !important;
+}
+
+.btn-emerald:hover,
+#sendCommentBtn:hover,
+.send-btn:hover,
+button.btn-emerald:hover,
+.comment-input-group button:hover,
+.btn-success.send-btn:hover,
+button.btn-success:hover {
+    background: linear-gradient(
+        135deg,
+        #7c3aed 0%,
+        #c026d3 100%
+    ) !important;
+    transform: translateY(-2px) !important;
+    box-shadow:
+        0 8px 20px rgba(217, 70, 239, 0.45) !important;
+}
+
+.btn-emerald:active,
+#sendCommentBtn:active,
+.btn-success.send-btn:active {
+    transform: translateY(0) !important;
+}
+
+
+/* ===================================================
+   14. CUSTOM ADD BUTTON
+   =================================================== */
+
+.btn-custom-add {
+    width: 38px;
+    height: 38px;
+    background: var(--primary-soft) !important;
+    border: 1px dashed var(--primary) !important;
+    color: var(--primary-light) !important;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.btn-custom-add:hover {
+    background: var(--primary) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow:
+        0 5px 15px rgba(139, 92, 246, 0.35);
+}
+
+
+/* ===================================================
+   15. DANGER / LOGOUT BUTTONS
+   =================================================== */
+
+.btn-danger,
+button[onclick="logout()"] {
+    background-color: var(--danger) !important;
+    border: 1px solid var(--danger) !important;
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    border-radius: 12px !important;
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease !important;
+}
+
+.btn-danger:hover,
+button[onclick="logout()"]:hover {
+    background-color: var(--danger-hover) !important;
+    transform: translateY(-1px);
+}
+
+
+/* ===================================================
+   16. SEARCH BOX
+   =================================================== */
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    height: 50px;
+    border-radius: 14px;
+    padding-right: 50px;
+}
+
+.search-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    background: var(--active-gradient) !important;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow:
+        0 4px 10px rgba(139, 92, 246, 0.3);
+}
+
+.search-btn:hover {
+    background: var(--primary-hover) !important;
+    transform:
+        translateY(-50%)
+        scale(1.05);
+}
+
+
+/* ===================================================
+   17. CARDS
+   =================================================== */
+
+.card,
+.post-card,
+.custom-post-card {
+    border: 1px solid var(--border) !important;
+    border-radius: 18px !important;
+    background: var(--card-bg) !important;
+    box-shadow: var(--shadow-sm);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+    overflow: visible !important;
+}
+
+.card:hover,
+.post-card:hover,
+.custom-post-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 14px 35px rgba(139, 92, 246, 0.15) !important;
+    border-color:
+        rgba(139, 92, 246, 0.35) !important;
+}
+
+
+/* ===================================================
+   18. CARD HEADER
+   =================================================== */
+
+.card-header {
+    background: var(--header-bg) !important;
+    color: var(--text) !important;
+    font-weight: 600;
+    padding: 15px 20px;
+    border-bottom:
+        1px solid var(--border) !important;
+    border-radius: 18px 18px 0 0 !important;
+}
+
+.card-header i,
+.card-header button {
+    margin-left: 12px !important;
+    transition:
+        transform 0.2s ease !important;
+}
+
+.card-header i:hover {
+    transform: scale(1.2) !important;
+    color: var(--primary) !important;
+}
+
+
+/* ===================================================
+   19. CARD BODY / POST CONTENT
+   =================================================== */
+
+.card-body {
+    position: relative;
+    min-height: 200px;
+    background-size: cover;
+    background-position: center;
+    padding: 25px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: visible !important;
+}
+
+.card-body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.20),
+            rgba(0, 0, 0, 0.50)
+        );
+}
+
+.card-body > * {
+    position: relative;
+    z-index: 2;
+}
+
+.card-title {
+    color: #ffffff !important;
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.3px;
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card-text {
+    color: #f8f7ff !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    opacity: 0.95;
+    text-shadow:
+        0 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ===================================================
+   20. POST BANNER
+   =================================================== */
+
+.post-banner-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+.post-banner-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.60)
+        );
+}
+
+
+/* ===================================================
+   21. POST ACTIONS
+   =================================================== */
+
+.post-actions {
+    border-top:
+        1px solid var(--border);
+    padding: 12px 20px;
+    background: var(--card-bg);
+}
+
+.action-btn {
+    background: var(--primary-soft);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background: var(--primary-soft-hover);
+    color: var(--primary-light);
+    border-color:
+        rgba(139, 92, 246, 0.40);
+    transform: translateY(-1px);
+}
+
+.btn-icon-action {
+    background: var(--primary-soft);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.btn-icon-action:hover {
+    background: var(--primary-soft-hover);
+    color: var(--primary-light);
+}
+
+
+/* ===================================================
+   22. POST ICONS
+   =================================================== */
+
+.bi-pencil-square {
+    color: #f59e0b !important;
+    font-size: 1.2rem !important;
+    cursor: pointer;
+}
+
+.bi-pencil-square:hover {
+    color: #d97706 !important;
+}
+
+.bi-trash {
+    color: #f43f5e !important;
+    font-size: 1.2rem !important;
+    cursor: pointer;
+}
+
+.bi-trash:hover {
+    color: #e11d48 !important;
+}
+
+
+/* ===================================================
+   23. COMMENTS
+   =================================================== */
+
+[id^="comments-list-"] {
+    overflow: visible !important;
+}
+
+.comment-box-item {
+    background-color: var(--header-bg) !important;
+    color: var(--text) !important;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: visible !important;
+}
+
+.comment-text-content {
+    color: var(--text) !important;
+}
+
+.comment-dots-btn {
+    color: var(--text-muted) !important;
+}
+
+.comment-dots-btn:hover {
+    color: var(--primary) !important;
+}
+
+.comment-input-field {
+    background-color: var(--card-bg) !important;
+    color: var(--text) !important;
+    border:
+        1px solid var(--border) !important;
+    border-radius: 10px !important;
+}
+
+.comment-input-field:focus {
+    border-color:
+        var(--primary) !important;
+    box-shadow:
+        0 0 0 3px var(--primary-soft) !important;
+}
+
+.comment-input-field::placeholder {
+    color: var(--text-muted) !important;
+}
+
+.no-comment-text {
+    color: var(--text-muted) !important;
+}
+
+
+/* ===================================================
+   24. COMMENT DROPDOWNS
+   =================================================== */
+
+.custom-comment-dropdown,
+.comment-item .dropdown-menu {
+    background-color: var(--card-bg) !important;
+    border:
+        1px solid var(--border) !important;
+    position: absolute !important;
+    z-index: 9999 !important;
+    bottom: 100% !important;
+    top: auto !important;
+    right: 0 !important;
+    margin-bottom: 5px !important;
+    border-radius: 12px !important;
+    box-shadow: var(--shadow-lg);
+}
+
+.custom-comment-dropdown .dropdown-item {
+    color: var(--text) !important;
+    border-radius: 8px;
+}
+
+.custom-comment-dropdown .dropdown-item:hover {
+    background-color: var(--primary-soft) !important;
+    color: var(--primary-light) !important;
+}
+
+
+/* ===================================================
+   25. POST OPTIONS DROPDOWN
+   =================================================== */
+
+.custom-post-card .dropdown-menu {
+    background: var(--card-bg) !important;
+    border:
+        1px solid var(--border) !important;
+    border-radius: 12px;
+    padding: 6px;
+    min-width: 150px;
+    box-shadow: var(--shadow-lg);
+}
+
+.custom-post-card .dropdown-item {
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.custom-post-card .dropdown-item:hover {
+    background: var(--primary-soft) !important;
+    color: var(--primary-light) !important;
+}
+
+.custom-post-card .dropdown > button {
+    color: var(--text) !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.custom-post-card .dropdown > button:hover {
+    color: var(--primary) !important;
+}
+
+
+/* ===================================================
+   26. DROPDOWN WARNING / DANGER
+   =================================================== */
+
+.custom-post-card .dropdown-item.text-warning {
+    color: #f59e0b !important;
+}
+
+.custom-post-card .dropdown-item.text-warning:hover {
+    background: rgba(245, 158, 11, 0.10) !important;
+}
+
+.custom-post-card .dropdown-item.text-danger {
+    color: #f43f5e !important;
+}
+
+.custom-post-card .dropdown-item.text-danger:hover {
+    background: rgba(244, 63, 94, 0.10) !important;
+}
+
+
+/* ===================================================
+   27. NOTIFICATION POPUP
+   =================================================== */
+
+.notification-popup {
+    width: 320px;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    z-index: 99999;
+    padding: 14px;
+    background: var(--card-bg) !important;
+    color: var(--text);
+    border:
+        1px solid var(--border) !important;
+    border-radius: 14px;
+    box-shadow: var(--shadow-lg);
+    display: none;
+}
+
+.notification-popup.show {
+    display: block;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom:
+        1px solid var(--border);
+}
+
+.notification-header h6 {
+    color: var(--text) !important;
+    font-weight: 600;
+}
+
+.notification-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    background:
+        var(--primary-soft) !important;
+    color: var(--text);
+    border-left:
+        3px solid var(--primary);
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.notification-item:hover {
+    background:
+        var(--primary-soft-hover) !important;
+}
+
+.notification-message {
+    color: var(--text) !important;
+}
+
+.notif-item {
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition:
+        background 0.2s ease;
+    font-size: 0.85rem;
+}
+
+.notif-item:hover {
+    background:
+        var(--primary-soft);
+}
+
+.notif-item.unread {
+    background:
+        var(--primary-soft);
+    border-left:
+        3px solid var(--primary);
+}
+
+
+/* ===================================================
+   28. NOTIFICATION DARK MODE
+   =================================================== */
+
+[data-theme="dark"] .notification-popup,
+body.dark-mode .notification-popup,
+body.dark .notification-popup {
+    background: #15131f !important;
+    color: #ffffff;
+    border-color:
+        rgba(255, 255, 255, 0.10) !important;
+}
+
+[data-theme="dark"] .notification-header,
+body.dark-mode .notification-header,
+body.dark .notification-header {
+    border-color:
+        rgba(255, 255, 255, 0.10);
+}
+
+[data-theme="dark"] .notification-header h6,
+body.dark-mode .notification-header h6,
+body.dark .notification-header h6 {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .notification-item,
+body.dark-mode .notification-item,
+body.dark .notification-item {
+    background:
+        rgba(139, 92, 246, 0.13) !important;
+    color: #ffffff;
+}
+
+[data-theme="dark"] .notification-item:hover,
+body.dark-mode .notification-item:hover,
+body.dark .notification-item:hover {
+    background:
+        rgba(139, 92, 246, 0.21) !important;
+}
+
+[data-theme="dark"] .notification-message,
+body.dark-mode .notification-message,
+body.dark .notification-message {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .notification-popup .text-muted,
+body.dark-mode .notification-popup .text-muted,
+body.dark .notification-popup .text-muted {
+    color: #aaa4bb !important;
+}
+
+[data-theme="dark"] .notification-popup .border-secondary,
+body.dark-mode .notification-popup .border-secondary,
+body.dark .notification-popup .border-secondary {
+    border-color:
+        rgba(255, 255, 255, 0.15) !important;
+}
+
+
+/* ===================================================
+   29. SWEETALERT2
+   =================================================== */
+
+.swal2-popup {
+    background-color:
+        var(--card-bg) !important;
+    border:
+        1px solid var(--border) !important;
+    border-radius: 16px !important;
+    box-shadow:
+        var(--shadow-lg) !important;
+    font-family:
+        "Poppins",
+        system-ui,
+        sans-serif !important;
+}
+
+.swal2-title {
+    color: var(--text) !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+
+.swal2-html-container,
+.swal2-content {
+    color: var(--text-muted) !important;
+    font-size: 14px !important;
+}
+
+.swal2-confirm {
+    background:
+        var(--active-gradient) !important;
+    color: #ffffff !important;
+    border-radius: 9px !important;
+    padding: 10px 24px !important;
+    box-shadow:
+        0 5px 15px
+        rgba(139, 92, 246, 0.35);
+}
+
+.swal2-confirm:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #c026d3
+        ) !important;
+}
+
+.swal2-cancel {
+    background-color:
+        var(--header-bg) !important;
+    color:
+        var(--text-muted) !important;
+    border-radius:
+        9px !important;
+}
+
+
+/* ===================================================
+   30. EMPTY STATE
+   =================================================== */
+
+.empty-state-card {
+    background-color:
+        var(--card-bg) !important;
+    background:
+        var(--card-bg) !important;
+    border-radius:
+        16px !important;
+    border:
+        1px solid var(--border) !important;
+    box-shadow:
+        var(--shadow-sm);
+}
+
+.empty-state-card .empty-icon,
+.empty-state-card strong {
+    color:
+        var(--primary) !important;
+}
+
+.empty-state-card .empty-title {
+    color:
+        var(--text) !important;
+}
+
+.empty-state-card .empty-text {
+    color:
+        var(--text-muted) !important;
+}
+
+
+/* ===================================================
+   31. UTILITY CLASSES
+   =================================================== */
+
+.text-emerald {
+    color:
+        var(--primary) !important;
+}
+
+.bg-emerald-soft {
+    background-color:
+        var(--primary-soft) !important;
+}
+
+
+/* Purple utility classes */
+
+.text-primary-purple {
+    color:
+        var(--primary) !important;
+}
+
+.bg-primary-purple {
+    background:
+        var(--primary) !important;
+    color:
+        #ffffff !important;
+}
+
+.bg-primary-soft {
+    background:
+        var(--primary-soft) !important;
+}
+
+.border-primary-purple {
+    border-color:
+        var(--primary) !important;
+}
+
+
+/* ===================================================
+   32. FOCUS / ACCESSIBILITY
+   =================================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline:
+        2px solid var(--primary) !important;
+    outline-offset:
+        2px;
+}
+
+
+/* ===================================================
+   33. POSTS ANIMATION
+   =================================================== */
+
+.posts .card,
+.posts .post-card {
+    animation:
+        fade 0.4s ease;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ===================================================
+   34. HOVER ANIMATION & COMPLETER
+   =================================================== */
+
+a,
+button,
+.btn,
+.colorbox,
+.bg-preset,
+.color-preset,
+.avatar-circle,
+.images img {
+    -webkit-tap-highlight-color: transparent;
+}
+/* Send button target fix with high specificity */
+button.send-btn-purple,
+.comment-input-group button,
+#sendCommentBtn {
+    background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%) !important;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    padding: 8px 20px !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35) !important;
+    transition: all 0.2s ease !important;
+}
+
+button.send-btn-purple:hover,
+.comment-input-group button:hover,
+#sendCommentBtn:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #c026d3 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(217, 70, 239, 0.45) !important;
+}
+/* Card aur comment container overflow fix */
+.card,
+.post-card,
+.card-body,
+.comment-box-item,
+[id^="comments-list-"] {
+    overflow: visible !important;
+}
+
+/* Comment dropdown positioning fix */
+.comment-box-item .dropdown,
+.comment-box-item .dropdown-menu {
+    position: absolute !important;
+    z-index: 1050 !important;
+}
+
+.comment-box-item .dropdown-menu {
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+/* Comment Item Container */
+.comment-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 10px 14px !important;
+    margin-bottom: 8px !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* User Name Styling */
+.comment-item .comment-author,
+.comment-item h6,
+.comment-item strong {
+    color: #a855f7 !important; /* Soft purple theme accent */
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 2px !important;
+    display: block !important;
+}
+
+/* Comment Text Styling */
+.comment-item .comment-text,
+.comment-item p {
+    color: #e2e8f0 !important;
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    word-break: break-word !important;
+}
+
+/* Three-dots Menu Fix */
+.comment-item .dropdown {
+    position: absolute !important;
+    top: 8px !important;
+    right: 10px !important;
+}
+
+.comment-item .dropdown-menu {
+    background-color: #1a1625 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    z-index: 1050 !important;
+}
+
+.comment-item .dropdown-item {
+    color: #cbd5e1 !important;
+    font-size: 0.85rem !important;
+}
+
+.comment-item .dropdown-item:hover {
+    background-color: rgba(168, 85, 247, 0.15) !important;
+    color: #ffffff !important;
+}
+/* Comment Dropdown Alignment & Overflow Fix */
+.comment-box-item {
+    position: relative !important;
+}
+
+.comment-box-item .dropdown {
+    position: relative !important;
+}
+
+.comment-box-item .custom-comment-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    margin-top: 4px !important;
+    z-index: 9999 !important;
+    background-color: #1e192d !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    min-width: 120px !important;
+}
+
+/* Post Card aur Comments Container Clipping Fix */
+.post-card,
+.card,
+.comments-container,
+[id^="comments-list-"] {
+    overflow: visible !important;
+}
+/* Comment Dropdown Stacking & Position Fix */
+.comment-box-item .dropdown-menu {
+    position: absolute !important;
+    top: 25px !important;
+    right: 0 !important;
+    left: auto !important;
+    z-index: 10000 !important;
+    background-color: #1a1625 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    min-width: 110px !important;
+    padding: 4px 0 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure container does not clip the menu */
+[id^="comments-list-"] {
+    overflow-y: visible !important;
+    padding-bottom: 25px !important; /* Space for menu */
+}
+/* Comment Dropdown Layering Fix */
+.comment-box-item {
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+.comment-box-item .dropdown {
+    position: relative !important;
+}
+
+.comment-box-item .custom-comment-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: auto !important;
+    z-index: 99999 !important; /* Send button aur input se upar lane ke liye */
+    background-color: #1a1625 !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6) !important;
+    min-width: 120px !important;
+}
+
+/* Comment section container overflow fix */
+[id^="comments-list-"],
+.comments-container {
+    overflow: visible !important;
+}
+/* Card container clipping fix */
+.post-card, 
+.card, 
+.card-body,
+[id^="comments-list-"] {
+    overflow: visible !important;
+}
+/* Open dropdown upwards above comment card */
+.comment-box-item .dropdown-menu {
+    bottom: 100% !important;
+    top: auto !important;
+    right: 0 !important;
+    left: auto !important;
+    margin-bottom: 5px !important;
+    z-index: 99999 !important;
+    background-color: #1a1625 !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5) !important;
+}
+/* Dynamic Dropdown Styling for Light & Dark Themes */
+.comment-box-item .custom-comment-dropdown {
+    background-color: var(--card-bg, #ffffff) !important;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.12)) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.comment-box-item .custom-comment-dropdown .dropdown-item {
+    color: var(--text-color, #334155) !important;
+}
+
+.comment-box-item .custom-comment-dropdown .dropdown-item:hover {
+    background-color: var(--hover-bg, rgba(168, 85, 247, 0.1)) !important;
+}
+
+/* Specific Light Mode Overrides (Agar aap body.light-mode use kar rahe hain) */
+body.light-mode .custom-comment-dropdown,
+[data-theme="light"] .custom-comment-dropdown {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+body.light-mode .custom-comment-dropdown .dropdown-item,
+[data-theme="light"] .custom-comment-dropdown .dropdown-item {
+    color: #1e293b !important;
+}
+
+body.light-mode .custom-comment-dropdown .dropdown-item:hover,
+[data-theme="light"] .custom-comment-dropdown .dropdown-item:hover {
+    background-color: #f1f5f9 !important;
+}
+/* User Profile Header Overrides */
+.user-avatar-circle {
+    background: linear-gradient(135deg, #a855f7, #7c3aed) !important;
+    box-shadow: 0 2px 8px rgba(168, 85, 247, 0.3) !important;
+}
+
+/* Email Icon Accent */
+.user-email-text i,
+.post-header .bi-envelope-fill,
+.post-header .bi-envelope {
+    color: var(--primary-light, #a855f7) !important;
+}
+
+/* Light Mode Specific Adjustments */
+body.light-mode .user-avatar-circle,
+[data-theme="light"] .user-avatar-circle {
+    background: linear-gradient(135deg, #9333ea, #6b21a8) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .user-email-text i,
+[data-theme="light"] .post-header .bi-envelope-fill {
+    color: #9333ea !important;
+}
+/* Light Mode Purple Theme Consistency */
+body.light-mode .user-avatar-circle,
+[data-theme="light"] .user-avatar-circle {
+    background: linear-gradient(135deg, #a855f7, #7c3aed) !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .user-email-text i,
+[data-theme="light"] .user-email-text i {
+    color: #9333ea !important;
+}
+
+body.light-mode .user-email-text,
+[data-theme="light"] .user-email-text {
+    color: #64748b !important;
+}
+/* Container wrapper fix */
+.notif-btn-wrapper {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 38px !important;
+    height: 38px !important;
+    padding: 0 !important;
+}
+
+/* Bell Icon positioning */
+.notif-btn-wrapper i {
+    font-size: 20px;
+}
+
+/* Red Badge absolute positioning fix */
+.notif-btn-wrapper #notification-badge {
+    position: absolute !important;
+    top: 2px !important;
+    right: 2px !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: translate(25%, -25%) !important;
+    min-width: 18px !important;
+    height: 18px !important;
+    padding: 0 4px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 10px !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+    border: 2px solid #0f172a !important; /* Aapke background dark color se match karne ke liye */
+}
